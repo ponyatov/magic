@@ -1,33 +1,39 @@
 # magic system
 
+#.end
+
 MODULE	= magic
 TITLE	= 'magic system'
 AUTHOR	= 'Dmitry Ponyatov <dponyatov@gmail.com>'
 LICENSE	= 'GNU LesserGPL'
-GITHUB	= https://github.com/ponyatov/+MODULE
+GITHUB	= 'github.com/ponyatov/'+MODULE
 
 files = [ src.src log.log py.py Makefile .gitignore bat.bat README.md ]
 
+
 getproject = [
-	mkdir MODULE ; cd MODULE
-	touch files
-	git init
-	git remote add gh git@github.com:ponyatov/magic.git
+	[ mkdir@ MODULE cd@ MODULE ]
+	touch@ files
+	git@ init
+	git@ remote @add [ gh git@GITHUB ]
 ]
 
-bat.bat = @gvim -p files
+bat.bat = [ '@gvim' , -p files ]
 
-Makefile = [
-log.log : src.src py.py
-	python py.py < $< > $@ && tail $(TAIL) $@
-]
+.gitignore = [ '*~' '*.swp' '*.exe' '*.log' ]
 
 README.md = [
-	# MODULE
-	### TITLE
-
-	(c) AUTHOR , LICENSE
-
-	github: GITHUB
+	[ '#' MODULE ]
+	[ '###' TITLE ]
+	[]
+	[ '(c)' AUTHOR ',' LICENSE ]
+	[]
+	[ 'github:' https@GITHUB ]
 ]
 
+.end
+
+Makefile = [
+log.log :< src.src py.py >: []
+#	python py.py < $< > $@ && tail $(TAIL) $@
+]
