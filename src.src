@@ -2,8 +2,11 @@
 
 MODULE	= magic
 TITLE	= 'magic system'
+AUTHOR	= 'Dmitry Ponyatov <dponyatov@gmail.com>'
+LICENSE	= 'GNU LesserGPL'
+GITHUB	= https://github.com/ponyatov/+MODULE
 
-files = [ src.src log.log py.py Makefile .gitignore bat.bat ]
+files = [ src.src log.log py.py Makefile .gitignore bat.bat README.md ]
 
 getproject = [
 	mkdir MODULE ; cd MODULE
@@ -16,6 +19,15 @@ bat.bat = @gvim -p files
 
 Makefile = [
 log.log : src.src py.py
-	-> python py.py < src.src > log.log
+	python py.py < $< > $@ && tail $(TAIL) $@
+]
+
+README.md = [
+	# MODULE
+	### TITLE
+
+	(c) AUTHOR , LICENSE
+
+	github: GITHUB
 ]
 
