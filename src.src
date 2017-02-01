@@ -1,0 +1,21 @@
+# magic system
+
+MODULE	= magic
+TITLE	= 'magic system'
+
+files = [ src.src log.log py.py Makefile .gitignore bat.bat ]
+
+getproject = [
+	mkdir MODULE ; cd MODULE
+	touch files
+	git init
+	git remote add gh git@github.com:ponyatov/magic.git
+]
+
+bat.bat = @gvim -p files
+
+Makefile = [
+log.log : src.src py.py
+	-> python py.py < src.src > log.log
+]
+
